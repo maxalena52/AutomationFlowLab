@@ -103,7 +103,7 @@ var HEADERS = { TSS_SHELL: "X-TSS_SHELL" };
 * the dev styles URL for route-scoped CSS collection.
 */
 async function getStartManifest(matchedRoutes) {
-	const { tsrStartManifest } = await import("../_tanstack-start-manifest_v-CYjUFYye.mjs");
+	const { tsrStartManifest } = await import("../_tanstack-start-manifest_v-BUtAlAKv.mjs");
 	const startManifest = tsrStartManifest();
 	let routes = startManifest.routes;
 	routes[rootRouteId];
@@ -124,7 +124,7 @@ async function getStartManifest(matchedRoutes) {
 }
 var manifest = { "3c9657c46f54c4c6ae85dda6ef44849eec7eb95f2798badbb1362ba09aed3f9b": {
 	functionName: "runGrowthCheck_createServerFn_handler",
-	importer: () => import("./growth-check.functions-C8DgUyHN.mjs")
+	importer: () => import("./growth-check.functions-D8e-C5ZE.mjs")
 } };
 async function getServerFnById(id, access) {
 	const serverFnInfo = manifest[id];
@@ -1528,7 +1528,7 @@ var getBaseManifest = getProdBaseManifest;
 var createEarlyHintsForRequest = createEarlyHintsCollector;
 async function loadEntries() {
 	const [routerEntry, startEntry, pluginAdapters] = await Promise.all([
-		import("./router-DhDi7psx.mjs").then((n) => n.t),
+		import("./router-496UPTLt.mjs").then((n) => n.t),
 		import("./start-5Z2QO8AU.mjs"),
 		import("./empty-plugin-adapters-D9UWiqvJ.mjs")
 	]);

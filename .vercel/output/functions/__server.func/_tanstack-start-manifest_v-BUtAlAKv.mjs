@@ -1,4 +1,4 @@
-//#region node_modules/.nitro/vite/services/ssr/assets/_tanstack-start-manifest_v-CYjUFYye.js
+//#region node_modules/.nitro/vite/services/ssr/assets/_tanstack-start-manifest_v-BUtAlAKv.js
 var tsrStartManifest = () => ({ routes: {
 	__root__: {
 		filePath: "/workspace/src/routes/__root.tsx",
@@ -25,7 +25,7 @@ var tsrStartManifest = () => ({ routes: {
 			"/tools/"
 		],
 		preloads: [
-			"/assets/index-DfuahL5S.js",
+			"/assets/index-Djo1rgMm.js",
 			"/assets/link-CbLTYCOY.js",
 			"/assets/invariant-CgFvOqN2.js",
 			"/assets/preload-helper-Crd7NecA.js"
@@ -33,23 +33,23 @@ var tsrStartManifest = () => ({ routes: {
 		scripts: [{ attrs: {
 			type: "module",
 			async: !0,
-			src: "/assets/index-DfuahL5S.js"
+			src: "/assets/index-Djo1rgMm.js"
 		} }]
 	},
 	"/": {
 		filePath: "/workspace/src/routes/index.tsx",
 		children: void 0,
-		preloads: ["/assets/routes-i9fEmKQB.js", "/assets/website-check-D0pM6gr4.js"]
+		preloads: ["/assets/routes-C8peQZEo.js", "/assets/website-check-CBRz3_m4.js"]
 	},
 	"/about": {
 		filePath: "/workspace/src/routes/about.tsx",
 		children: void 0,
-		preloads: ["/assets/about-BtrXrnak.js"]
+		preloads: ["/assets/about-FKcKCTz-.js"]
 	},
 	"/audit": {
 		filePath: "/workspace/src/routes/audit.tsx",
 		children: void 0,
-		preloads: ["/assets/audit-DB8dLgHw.js"]
+		preloads: ["/assets/audit-CjrrPoIh.js"]
 	},
 	"/community-standards": {
 		filePath: "/workspace/src/routes/community-standards.tsx",
@@ -60,9 +60,9 @@ var tsrStartManifest = () => ({ routes: {
 		filePath: "/workspace/src/routes/contact.tsx",
 		children: void 0,
 		preloads: [
-			"/assets/contact-CYGVfGt-.js",
+			"/assets/contact-DvVPByKb.js",
 			"/assets/policy-document-C9nwsUvy.js",
-			"/assets/enquiry-form-C3U9ghfF.js"
+			"/assets/enquiry-form-BVsvosTe.js"
 		]
 	},
 	"/cookies": {
@@ -78,7 +78,7 @@ var tsrStartManifest = () => ({ routes: {
 	"/custom-builds": {
 		filePath: "/workspace/src/routes/custom-builds.tsx",
 		children: void 0,
-		preloads: ["/assets/custom-builds-s21fVwdZ.js", "/assets/enquiry-form-C3U9ghfF.js"]
+		preloads: ["/assets/custom-builds-CjQ81f7K.js", "/assets/enquiry-form-BVsvosTe.js"]
 	},
 	"/legal": {
 		filePath: "/workspace/src/routes/legal.tsx",
@@ -93,7 +93,7 @@ var tsrStartManifest = () => ({ routes: {
 	"/pricing": {
 		filePath: "/workspace/src/routes/pricing.tsx",
 		children: void 0,
-		preloads: ["/assets/pricing-DbUcoj2-.js"]
+		preloads: ["/assets/pricing-CeJpDUCn.js"]
 	},
 	"/privacy": {
 		filePath: "/workspace/src/routes/privacy.tsx",
@@ -103,12 +103,12 @@ var tsrStartManifest = () => ({ routes: {
 	"/services": {
 		filePath: "/workspace/src/routes/services.tsx",
 		children: void 0,
-		preloads: ["/assets/services-CjUGbolj.js"]
+		preloads: ["/assets/services-4La9zw9e.js"]
 	},
 	"/support-plans": {
 		filePath: "/workspace/src/routes/support-plans.tsx",
 		children: void 0,
-		preloads: ["/assets/support-plans-BQL2yuiK.js", "/assets/enquiry-form-C3U9ghfF.js"]
+		preloads: ["/assets/support-plans-D6MhVRN1.js", "/assets/enquiry-form-BVsvosTe.js"]
 	},
 	"/terms": {
 		filePath: "/workspace/src/routes/terms.tsx",
@@ -118,12 +118,12 @@ var tsrStartManifest = () => ({ routes: {
 	"/tools/certflow": {
 		filePath: "/workspace/src/routes/tools/certflow.tsx",
 		children: void 0,
-		preloads: ["/assets/certflow-D3yDJT4Y.js", "/assets/enquiry-form-C3U9ghfF.js"]
+		preloads: ["/assets/certflow-DMrEExkQ.js", "/assets/enquiry-form-BVsvosTe.js"]
 	},
 	"/tools/growth-check": {
 		filePath: "/workspace/src/routes/tools/growth-check.tsx",
 		children: void 0,
-		preloads: ["/assets/growth-check-BCHYTHpj.js", "/assets/website-check-D0pM6gr4.js"]
+		preloads: ["/assets/growth-check-Cyfs0Hpz.js", "/assets/website-check-CBRz3_m4.js"]
 	},
 	"/tools/license-compare": {
 		filePath: "/workspace/src/routes/tools/license-compare.tsx",
@@ -138,7 +138,7 @@ var tsrStartManifest = () => ({ routes: {
 	"/tools/": {
 		filePath: "/workspace/src/routes/tools/index.tsx",
 		children: void 0,
-		preloads: ["/assets/tools-B0bMdIAM.js"]
+		preloads: ["/assets/tools-BPXm9Ew7.js"]
 	}
 } });
 //#endregion

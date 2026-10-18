@@ -1,7 +1,7 @@
 import { t as auditPagePoints } from "./site-BaGvWwC4.mjs";
 import { x as require_jsx_runtime, y as Link } from "../_libs/@tanstack/react-router+[...].mjs";
-import { i as PageHeader } from "./router-DhDi7psx.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/audit-MgRywQZw.js
+import { i as PageHeader } from "./router-496UPTLt.mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/audit-Bowfb-vA.js
 var import_jsx_runtime = require_jsx_runtime();
 function AuditPage() {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {

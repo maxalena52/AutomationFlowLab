@@ -1,7 +1,7 @@
 import { o as monthlyPrices, s as oneOffPrices } from "./site-BaGvWwC4.mjs";
 import { x as require_jsx_runtime, y as Link } from "../_libs/@tanstack/react-router+[...].mjs";
-import { i as PageHeader } from "./router-DhDi7psx.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/pricing-DKvdTO6U.js
+import { i as PageHeader } from "./router-496UPTLt.mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/pricing-CyvYItrW.js
 var import_jsx_runtime = require_jsx_runtime();
 var how = [
 	{

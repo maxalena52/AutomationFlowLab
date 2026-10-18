@@ -1,5 +1,5 @@
 import { n as TSS_SERVER_FUNCTION, t as createServerFn } from "./ssr.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/growth-check.functions-C8DgUyHN.js
+//#region node_modules/.nitro/vite/services/ssr/assets/growth-check.functions-D8e-C5ZE.js
 var createServerRpc = (serverFnMeta, splitImportFn) => {
 	const url = "/_serverFn/" + serverFnMeta.id;
 	return Object.assign(splitImportFn, {
@@ -20,6 +20,11 @@ function blockedHost(hostname) {
 	if (a === 172 && b >= 16 && b <= 31) return true;
 	if (a === 192 && b === 168) return true;
 	return false;
+}
+function isChallenge(status, headers, html) {
+	if (headers.get("cf-mitigated")) return true;
+	if (headers.get("server")?.toLowerCase() === "cloudflare" && status === 403) return true;
+	return /cf-challenge|challenges\.cloudflare\.com|just a moment|attention required|verify you are human|cf-turnstile/i.test(html);
 }
 function textOf(html, tag) {
 	const match = new RegExp(`<${tag}\\b[^>]*>([\\s\\S]*?)</${tag}>`, "i").exec(html);
@@ -68,15 +73,42 @@ async function readPublicPage(raw) {
 			current = new URL(next, current);
 			continue;
 		}
-		if (!response.ok) return { error: "The check could not be completed." };
+		if (!response.ok) {
+			const body = await readLimited(response, 2e4);
+			if (isChallenge(response.status, response.headers, body)) return { error: "This site uses a security check that blocks automated reads. Open the page in your browser, copy the page source, and paste it below." };
+			return { error: "The check could not be completed." };
+		}
 		const type = response.headers.get("content-type") ?? "";
 		if (!/text\/html|application\/xhtml/i.test(type) && type !== "") return { error: "That address did not return a public web page." };
+		const html = await readLimited(response, 4e5);
+		if (isChallenge(response.status, response.headers, html)) return { error: "This site uses a security check that blocks automated reads. Open the page in your browser, copy the page source, and paste it below." };
 		return {
-			html: await readLimited(response, 4e5),
+			html,
 			finalUrl: current
 		};
 	}
 	return { error: "The check could not be completed." };
+}
+async function readArchive(raw) {
+	try {
+		const available = await fetch(`https://archive.org/wayback/available?url=${encodeURIComponent(raw)}`, { signal: AbortSignal.timeout(8e3) });
+		if (!available.ok) return null;
+		const snap = (await available.json()).archived_snapshots?.closest;
+		if (!snap?.available || !snap.timestamp) return null;
+		const response = await fetch(`https://web.archive.org/web/${snap.timestamp}id_/${raw}`, {
+			signal: AbortSignal.timeout(1e4),
+			headers: { accept: "text/html,application/xhtml+xml" }
+		});
+		if (!response.ok) return null;
+		const html = await readLimited(response, 4e5);
+		if (!/<(html|head|body|title)\b/i.test(html) || isChallenge(response.status, response.headers, html)) return null;
+		return {
+			html,
+			finalUrl: new URL(raw)
+		};
+	} catch {
+		return null;
+	}
 }
 function analyse(html, finalUrl) {
 	const title = textOf(html, "title");
@@ -188,20 +220,46 @@ var runGrowthCheck_createServerFn_handler = createServerRpc({
 	filename: "src/lib/growth-check.functions.ts"
 }, (opts) => runGrowthCheck.__executeServer(opts));
 var runGrowthCheck = createServerFn({ method: "POST" }).validator((input) => {
-	return { url: (typeof input === "object" && input && "url" in input ? String(input.url) : "").trim() };
+	const obj = typeof input === "object" && input ? input : {};
+	return {
+		url: String(obj.url ?? "").trim(),
+		html: typeof obj.html === "string" ? obj.html.slice(0, 4e5) : ""
+	};
 }).handler(runGrowthCheck_createServerFn_handler, async ({ data }) => {
+	let pageUrl;
+	try {
+		pageUrl = new URL(data.url);
+	} catch {
+		return {
+			overall: "NEEDS WORK",
+			findings: [],
+			error: "Enter a website address, such as yourbusiness.com."
+		};
+	}
+	if (pageUrl.protocol !== "http:" && pageUrl.protocol !== "https:") return {
+		overall: "NEEDS WORK",
+		findings: [],
+		error: "Enter a public website address."
+	};
+	if (data.html && /<(html|head|body|title)\b/i.test(data.html)) return {
+		...analyse(data.html, pageUrl),
+		source: "pasted"
+	};
 	const read = await readPublicPage(data.url);
-	if ("error" in read && read.error) return {
+	if ("html" in read && read.html) return {
+		...analyse(read.html, read.finalUrl),
+		source: "live"
+	};
+	const archived = await readArchive(data.url);
+	if (archived) return {
+		...analyse(archived.html, archived.finalUrl),
+		source: "archive"
+	};
+	return {
 		overall: "NEEDS WORK",
 		findings: [],
-		error: read.error
+		error: "error" in read && read.error || "The check could not be completed."
 	};
-	if (!("html" in read) || !read.html) return {
-		overall: "NEEDS WORK",
-		findings: [],
-		error: "The check could not be completed."
-	};
-	return analyse(read.html, read.finalUrl);
 });
 //#endregion
 export { runGrowthCheck_createServerFn_handler };

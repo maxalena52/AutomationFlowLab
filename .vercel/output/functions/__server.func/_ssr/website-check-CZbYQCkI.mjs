@@ -1,7 +1,7 @@
 import { i as __toESM } from "../_runtime.mjs";
 import { J as require_react, x as require_jsx_runtime, y as Link } from "../_libs/@tanstack/react-router+[...].mjs";
 import { n as TSS_SERVER_FUNCTION, r as getServerFnById, t as createServerFn } from "./ssr.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/website-check-BP_kMtaU.js
+//#region node_modules/.nitro/vite/services/ssr/assets/website-check-CZbYQCkI.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var badge = {
@@ -62,14 +62,20 @@ function overallCopy(status) {
 	return OVERALL[status];
 }
 var runGrowthCheck = createServerFn({ method: "POST" }).validator((input) => {
-	return { url: (typeof input === "object" && input && "url" in input ? String(input.url) : "").trim() };
+	const obj = typeof input === "object" && input ? input : {};
+	return {
+		url: String(obj.url ?? "").trim(),
+		html: typeof obj.html === "string" ? obj.html.slice(0, 4e5) : ""
+	};
 }).handler(createSsrRpc("3c9657c46f54c4c6ae85dda6ef44849eec7eb95f2798badbb1362ba09aed3f9b"));
 function WebsiteCheck({ source, id = "website-check" }) {
 	const fieldId = (0, import_react.useId)();
 	const [url, setUrl] = (0, import_react.useState)("");
+	const [sourceHtml, setSourceHtml] = (0, import_react.useState)("");
 	const [busy, setBusy] = (0, import_react.useState)(false);
 	const [error, setError] = (0, import_react.useState)("");
 	const [result, setResult] = (0, import_react.useState)(null);
+	const blocked = /security check|paste it below/i.test(error);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 		id,
 		children: [
@@ -94,12 +100,14 @@ function WebsiteCheck({ source, id = "website-check" }) {
 					try {
 						const data = await runGrowthCheck({ data: {
 							url: parsed.toString(),
-							source
+							source,
+							html: sourceHtml
 						} });
 						if (data.error || !data.findings?.length || !data.overall) setError(data.error ?? "The check could not be completed.");
 						else setResult({
 							overall: data.overall,
-							findings: data.findings.slice(0, 5)
+							findings: data.findings.slice(0, 5),
+							source: data.source
 						});
 					} catch {
 						setError("The check could not be completed.");
@@ -157,6 +165,37 @@ function WebsiteCheck({ source, id = "website-check" }) {
 				className: "mt-3 text-sm text-danger",
 				children: error
 			}) : null,
+			blocked ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "mt-4 rounded-xl border border-line bg-surface p-4",
+				children: [
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+						htmlFor: `${fieldId}-source`,
+						className: "text-sm font-semibold",
+						children: "Page source"
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+						className: "mt-1 text-sm text-muted",
+						children: "In your browser, open the page, then view source (Ctrl+U or Cmd+Option+U), select all, and paste it here."
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("textarea", {
+						id: `${fieldId}-source`,
+						value: sourceHtml,
+						onChange: (event) => setSourceHtml(event.target.value),
+						rows: 8,
+						className: "mt-3 w-full rounded-sm border border-line bg-paper px-3 py-2 font-mono text-xs",
+						placeholder: "<!DOCTYPE html>..."
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+						type: "button",
+						disabled: busy || sourceHtml.trim().length < 40,
+						onClick: async () => {
+							(document.getElementById(id)?.querySelector("form"))?.requestSubmit();
+						},
+						className: "mt-3 inline-flex h-12 items-center justify-center rounded-sm bg-primary px-5 text-base font-semibold text-primary-fg disabled:opacity-60",
+						children: busy ? "Checking" : "Check pasted page"
+					})
+				]
+			}) : null,
 			result ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
 				className: "mt-8",
 				"aria-live": "polite",
@@ -165,6 +204,14 @@ function WebsiteCheck({ source, id = "website-check" }) {
 						className: "text-sm font-semibold text-primary",
 						children: "Your website status"
 					}),
+					result.source === "archive" ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+						className: "mt-2 text-sm text-muted",
+						children: "The live site blocked the read. This check used the newest public Internet Archive copy of the page."
+					}) : null,
+					result.source === "pasted" ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+						className: "mt-2 text-sm text-muted",
+						children: "This check used the page source you pasted."
+					}) : null,
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 						className: "mt-2 font-display text-4xl",
 						children: result.overall

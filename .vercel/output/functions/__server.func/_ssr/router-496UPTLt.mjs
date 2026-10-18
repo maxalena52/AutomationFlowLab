@@ -1,9 +1,9 @@
 import { i as __toESM } from "../_runtime.mjs";
 import { i as company } from "./site-BaGvWwC4.mjs";
 import { J as require_react, _ as createFileRoute, b as useRouter, d as Scripts, f as HeadContent, g as lazyRouteComponent, h as Outlet, m as createRouter, v as createRootRoute, x as require_jsx_runtime, y as Link } from "../_libs/@tanstack/react-router+[...].mjs";
-import { i as ArrowLeft, n as TriangleAlert, r as Menu, t as X } from "../_libs/lucide-react.mjs";
+import { n as ArrowLeft, t as TriangleAlert } from "../_libs/lucide-react.mjs";
 import { a as union, i as string, n as number, r as object, t as literal } from "../_libs/zod.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/router-DhDi7psx.js
+//#region node_modules/.nitro/vite/services/ssr/assets/router-496UPTLt.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var __defProp = Object.defineProperty;
@@ -341,14 +341,12 @@ function PreviewHostBridge() {
 	}, [router]);
 	return null;
 }
-var navLink = "rounded-sm px-3 py-2 text-sm font-semibold";
 function active(pathname, to, exact = false) {
 	if (exact) return pathname === to;
 	return pathname === to || pathname.startsWith(`${to}/`);
 }
-function NavLinks({ pathname, stacked = false }) {
-	const base = stacked ? "flex h-12 items-center rounded-sm px-2 text-base font-semibold" : navLink;
-	const idle = stacked ? "text-ink" : "text-muted hover:text-ink";
+function NavLinks({ pathname }) {
+	const base = "inline-flex h-11 items-center rounded-sm px-3 text-sm font-semibold";
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_jsx_runtime.Fragment, { children: [
 		{
 			to: "/tools/growth-check",
@@ -377,7 +375,7 @@ function NavLinks({ pathname, stacked = false }) {
 			to: item.to,
 			search: item.to === "/contact" ? { topic: "" } : void 0,
 			"aria-current": on ? "page" : void 0,
-			className: `${base} ${on ? "bg-surface text-ink" : idle}`,
+			className: `${base} ${on ? "bg-surface text-ink" : "text-muted hover:text-ink"}`,
 			children: item.label
 		}, item.to);
 	}) });
@@ -398,18 +396,6 @@ function CheckButton({ pathname, block = false }) {
 function SiteShell({ children }) {
 	const router = useRouter();
 	const pathname = router.state.location.pathname;
-	const [open, setOpen] = (0, import_react.useState)(false);
-	(0, import_react.useEffect)(() => {
-		setOpen(false);
-	}, [pathname]);
-	(0, import_react.useEffect)(() => {
-		if (!open) return;
-		const previous = document.body.style.overflow;
-		document.body.style.overflow = "hidden";
-		return () => {
-			document.body.style.overflow = previous;
-		};
-	}, [open]);
 	function back() {
 		if (typeof window !== "undefined" && window.history.length > 1) {
 			router.history.back();
@@ -428,91 +414,33 @@ function SiteShell({ children }) {
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("header", {
 				className: "sticky top-0 z-40 border-b border-line bg-paper",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					className: "mx-auto flex min-h-20 w-full max-w-6xl items-center justify-between gap-3 px-5 py-2",
-					children: [
-						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							className: "flex min-w-0 items-center gap-2",
-							children: [pathname === "/" ? null : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
-								type: "button",
-								onClick: back,
-								className: "grid size-11 shrink-0 place-items-center rounded-sm border border-line bg-surface text-ink",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowLeft, { "aria-hidden": "true" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: "sr-only",
-									children: "Back"
-								})]
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
-								to: "/",
-								className: "flex min-w-0 items-center",
-								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
-									src: "/logo.png",
-									alt: "Automation Flow Lab",
-									className: "h-auto w-40 sm:w-52"
-								})
-							})]
-						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("nav", {
-							className: "hidden items-center gap-1 xl:flex",
-							"aria-label": "Primary",
-							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(NavLinks, { pathname })
-						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-							className: "hidden items-center gap-2 xl:flex",
-							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CheckButton, { pathname })
-						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
+					className: "mx-auto flex w-full max-w-6xl flex-wrap items-center gap-x-3 gap-y-2 py-3 pl-5 pr-8",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "flex min-w-0 items-center gap-2",
+						children: [pathname === "/" ? null : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
 							type: "button",
-							className: "grid size-11 place-items-center rounded-sm border border-line bg-surface xl:hidden",
-							"aria-expanded": open,
-							"aria-controls": "mobile-nav",
-							onClick: () => setOpen((value) => !value),
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+							onClick: back,
+							className: "grid size-11 shrink-0 place-items-center rounded-sm border border-line bg-surface text-ink",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowLeft, { "aria-hidden": "true" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 								className: "sr-only",
-								children: open ? "Close menu" : "Open menu"
-							}), open ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(X, { "aria-hidden": "true" }) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Menu, { "aria-hidden": "true" })]
-						})
-					]
+								children: "Back"
+							})]
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
+							to: "/",
+							className: "flex min-w-0 items-center",
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+								src: "/logo.png",
+								alt: "Automation Flow Lab",
+								className: "h-auto w-40 sm:w-52"
+							})
+						})]
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("nav", {
+						className: "flex flex-wrap items-center gap-1",
+						"aria-label": "Primary",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(NavLinks, { pathname }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CheckButton, { pathname })]
+					})]
 				})
 			}),
-			open ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				className: "fixed inset-0 z-50 xl:hidden",
-				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
-					type: "button",
-					className: "absolute inset-0 bg-ink/40",
-					"aria-label": "Close menu",
-					onClick: () => setOpen(false)
-				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("nav", {
-					id: "mobile-nav",
-					className: "absolute inset-y-0 right-0 flex w-full max-w-sm flex-col border-l border-line bg-paper shadow-xl",
-					"aria-label": "Mobile",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "flex h-16 items-center justify-between border-b border-line px-5",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-							className: "font-display text-lg",
-							children: company.name
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
-							type: "button",
-							className: "grid size-11 place-items-center rounded-sm border border-line bg-surface",
-							onClick: () => setOpen(false),
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(X, { "aria-hidden": "true" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								className: "sr-only",
-								children: "Close menu"
-							})]
-						})]
-					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "flex flex-1 flex-col overflow-y-auto px-3 py-3",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-							className: "px-2 pb-3",
-							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CheckButton, {
-								pathname,
-								block: true
-							})
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(NavLinks, {
-							pathname,
-							stacked: true
-						})]
-					})]
-				})]
-			}) : null,
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("main", {
 				id: "content",
 				className: "flex-1",
@@ -683,7 +611,7 @@ function PageHeader({ eyebrow, title, lede }) {
 		]
 	});
 }
-var styles_default = "/assets/styles-DsTwiCaS.css";
+var styles_default = "/assets/styles-CcuNVG7E.css";
 var Route$20 = createRootRoute({
 	head: () => ({
 		meta: [
@@ -705,8 +633,14 @@ var Route$20 = createRootRoute({
 		links: [
 			{
 				rel: "icon",
-				type: "image/svg+xml",
-				href: "/favicon.svg"
+				type: "image/png",
+				sizes: "192x192",
+				href: "/brand-icon.png"
+			},
+			{
+				rel: "apple-touch-icon",
+				sizes: "180x180",
+				href: "/__grok/icon-180.png"
 			},
 			{
 				rel: "stylesheet",
@@ -737,7 +671,7 @@ var Route$20 = createRootRoute({
 		] })]
 	})
 });
-var $$splitComponentImporter$19 = () => import("./routes-C4nuank5.mjs");
+var $$splitComponentImporter$19 = () => import("./routes-hHkxT97z.mjs");
 var Route$19 = createFileRoute("/")({
 	head: () => ({ meta: [{ title: "Website Growth Check and Business Systems — Automation Flow Lab" }, {
 		name: "description",
@@ -750,7 +684,7 @@ var Route$18 = createFileRoute("/about")({
 	head: () => ({ meta: [{ title: "About — Automation Flow Lab" }] }),
 	component: lazyRouteComponent($$splitComponentImporter$18, "component")
 });
-var $$splitComponentImporter$17 = () => import("./audit-MgRywQZw.mjs");
+var $$splitComponentImporter$17 = () => import("./audit-Bowfb-vA.mjs");
 var Route$17 = createFileRoute("/audit")({
 	head: () => ({ meta: [{ title: "Website Revenue & Growth Audit — Automation Flow Lab" }] }),
 	component: lazyRouteComponent($$splitComponentImporter$17, "component")
@@ -760,7 +694,7 @@ var Route$16 = createFileRoute("/community-standards")({
 	head: () => ({ meta: [{ title: "Community Standards — Automation Flow Lab" }] }),
 	component: lazyRouteComponent($$splitComponentImporter$16, "component")
 });
-var $$splitComponentImporter$15 = () => import("./contact-CFIDPQfR.mjs");
+var $$splitComponentImporter$15 = () => import("./contact-DhwOo1Oh.mjs");
 var Route$15 = createFileRoute("/contact")({
 	validateSearch: (search) => ({ topic: typeof search.topic === "string" ? search.topic : "" }),
 	head: () => ({ meta: [{ title: "Contact — Automation Flow Lab" }] }),
@@ -776,7 +710,7 @@ var Route$13 = createFileRoute("/copyright")({
 	head: () => ({ meta: [{ title: "Copyright Policy — Automation Flow Lab" }] }),
 	component: lazyRouteComponent($$splitComponentImporter$13, "component")
 });
-var $$splitComponentImporter$12 = () => import("./custom-builds-aVDwJ5Re.mjs");
+var $$splitComponentImporter$12 = () => import("./custom-builds-8m0SX6n2.mjs");
 var Route$12 = createFileRoute("/custom-builds")({
 	head: () => ({ meta: [{ title: "Custom Builds — Automation Flow Lab" }] }),
 	component: lazyRouteComponent($$splitComponentImporter$12, "component")
@@ -791,7 +725,7 @@ var Route$10 = createFileRoute("/legal-safety")({
 	head: () => ({ meta: [{ title: "Legal and Safety — Automation Flow Lab" }] }),
 	component: lazyRouteComponent($$splitComponentImporter$10, "component")
 });
-var $$splitComponentImporter$9 = () => import("./pricing-DKvdTO6U.mjs");
+var $$splitComponentImporter$9 = () => import("./pricing-CyvYItrW.mjs");
 var Route$9 = createFileRoute("/pricing")({
 	head: () => ({ meta: [{ title: "Pricing — Automation Flow Lab" }] }),
 	component: lazyRouteComponent($$splitComponentImporter$9, "component")
@@ -801,12 +735,12 @@ var Route$8 = createFileRoute("/privacy")({
 	head: () => ({ meta: [{ title: "Privacy Policy — Automation Flow Lab" }] }),
 	component: lazyRouteComponent($$splitComponentImporter$8, "component")
 });
-var $$splitComponentImporter$7 = () => import("./services-ClyD1Ucj.mjs");
+var $$splitComponentImporter$7 = () => import("./services-6nvpYN4r.mjs");
 var Route$7 = createFileRoute("/services")({
 	head: () => ({ meta: [{ title: "Services — Automation Flow Lab" }] }),
 	component: lazyRouteComponent($$splitComponentImporter$7, "component")
 });
-var $$splitComponentImporter$6 = () => import("./support-plans-B0Yhg-7S.mjs");
+var $$splitComponentImporter$6 = () => import("./support-plans-F3rCsdHs.mjs");
 var Route$6 = createFileRoute("/support-plans")({
 	validateSearch: (search) => ({ plan: typeof search.plan === "string" ? search.plan : "" }),
 	head: () => ({ meta: [{ title: "Support Plans — Automation Flow Lab" }] }),
@@ -817,7 +751,7 @@ var Route$5 = createFileRoute("/terms")({
 	head: () => ({ meta: [{ title: "Terms of Service — Automation Flow Lab" }] }),
 	component: lazyRouteComponent($$splitComponentImporter$5, "component")
 });
-var $$splitComponentImporter$4 = () => import("./tools-DBCy2fTb.mjs");
+var $$splitComponentImporter$4 = () => import("./tools-BDw-ng5X.mjs");
 var Route$4 = createFileRoute("/tools/")({
 	head: () => ({ meta: [{ title: "Tools — Automation Flow Lab" }] }),
 	component: lazyRouteComponent($$splitComponentImporter$4, "component")
@@ -827,7 +761,7 @@ var Route$3 = createFileRoute("/tools/certflow")({
 	head: () => ({ meta: [{ title: "Certflow — Automation Flow Lab" }] }),
 	component: lazyRouteComponent($$splitComponentImporter$3, "component")
 });
-var $$splitComponentImporter$2 = () => import("./growth-check-oyJvwnfW.mjs");
+var $$splitComponentImporter$2 = () => import("./growth-check-CkOFe7K8.mjs");
 var Route$2 = createFileRoute("/tools/growth-check")({
 	head: () => ({ meta: [{ title: "Website Growth Check — Automation Flow Lab" }] }),
 	component: lazyRouteComponent($$splitComponentImporter$2, "component")

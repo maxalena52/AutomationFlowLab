@@ -1,6 +1,6 @@
 import { x as require_jsx_runtime, y as Link } from "../_libs/@tanstack/react-router+[...].mjs";
-import { n as WebsiteCheck } from "./website-check-BP_kMtaU.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/growth-check-oyJvwnfW.js
+import { n as WebsiteCheck } from "./website-check-CZbYQCkI.mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/growth-check-CkOFe7K8.js
 var import_jsx_runtime = require_jsx_runtime();
 function GrowthCheckPage() {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
