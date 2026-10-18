@@ -14,8 +14,7 @@ function ContactPage() {
   const { topic } = Route.useSearch();
   return (
     <div>
-      <PolicyDocument page={policies.contact} />
-      <div className="mx-auto -mt-8 w-full max-w-3xl px-5 pb-20">
+      <div className="mx-auto w-full max-w-3xl px-5 pb-4 pt-12 md:pt-16">
         <EnquiryForm
           kind="contact"
           topic={topic}
@@ -27,6 +26,7 @@ function ContactPage() {
           }
         />
       </div>
+      <PolicyDocument page={policies.contact} />
     </div>
   );
 }
