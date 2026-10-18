@@ -18,7 +18,6 @@ const schema = {
   "@type": "ProfessionalService",
   name: company.name,
   url: `https://${company.domain}/`,
-  email: company.email,
   areaServed: company.country,
   description: company.description,
 };

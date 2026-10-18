@@ -1,14 +1,13 @@
 import { a as exampleFindings, c as otherHelp, i as company, l as pillars, n as auditPoints, u as process } from "./site-BaGvWwC4.mjs";
 import { x as require_jsx_runtime, y as Link } from "../_libs/@tanstack/react-router+[...].mjs";
 import { n as WebsiteCheck, t as FindingCard } from "./website-check-CZbYQCkI.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/routes-hHkxT97z.js
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-BpwlGKdE.js
 var import_jsx_runtime = require_jsx_runtime();
 var schema = {
 	"@context": "https://schema.org",
 	"@type": "ProfessionalService",
 	name: company.name,
 	url: `https://${company.domain}/`,
-	email: company.email,
 	areaServed: company.country,
 	description: company.description
 };

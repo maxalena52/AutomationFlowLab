@@ -78,11 +78,7 @@ export function EnquiryForm({
       <div className="rounded-xl border border-line bg-surface p-6" role="status">
         <h2 className="font-display text-2xl">Enquiry ready to send</h2>
         <p className="mt-3 text-muted">
-          Your email program should open with this enquiry addressed to{" "}
-          <a className="font-semibold text-ink underline decoration-line underline-offset-4" href={`mailto:${company.email}`}>
-            {company.email}
-          </a>
-          . Send that email to complete the request. Nothing is saved as an account on this website.
+          Your email program should open with this enquiry. Send that email to complete the request. Nothing is saved as an account on this website.
         </p>
       </div>
     );
@@ -211,8 +207,7 @@ export function EnquiryForm({
           </label>
           {errors.consent ? <p className="mt-1 text-sm text-danger">{errors.consent}</p> : null}
           <p className="mt-3 text-sm text-muted">
-            This website sends the enquiry as an email to {company.email}. It is not saved as an account. To ask about a
-            message you already sent, email that address.
+            This website sends the enquiry as an email. It is not saved as an account. To ask about a message you already sent, use the contact form.
           </p>
         </div>
         {formError ? (

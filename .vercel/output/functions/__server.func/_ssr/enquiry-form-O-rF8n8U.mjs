@@ -1,7 +1,7 @@
 import { i as __toESM } from "../_runtime.mjs";
 import { i as company } from "./site-BaGvWwC4.mjs";
 import { J as require_react, x as require_jsx_runtime, y as Link } from "../_libs/@tanstack/react-router+[...].mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/enquiry-form-D_8611aM.js
+//#region node_modules/.nitro/vite/services/ssr/assets/enquiry-form-O-rF8n8U.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var fieldClass = "h-11 w-full rounded-sm border border-line bg-surface px-3 font-sans text-base text-ink placeholder:text-muted";
@@ -58,18 +58,9 @@ function EnquiryForm({ kind, topic = "", plan = "", heading = "Send an enquiry",
 		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
 			className: "font-display text-2xl",
 			children: "Enquiry ready to send"
-		}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+		}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 			className: "mt-3 text-muted",
-			children: [
-				"Your email program should open with this enquiry addressed to",
-				" ",
-				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
-					className: "font-semibold text-ink underline decoration-line underline-offset-4",
-					href: `mailto:${company.email}`,
-					children: company.email
-				}),
-				". Send that email to complete the request. Nothing is saved as an account on this website."
-			]
+			children: "Your email program should open with this enquiry. Send that email to complete the request. Nothing is saved as an account on this website."
 		})]
 	});
 	function submit(event) {
@@ -327,13 +318,9 @@ function EnquiryForm({ kind, topic = "", plan = "", heading = "Send an enquiry",
 							className: "mt-1 text-sm text-danger",
 							children: errors.consent
 						}) : null,
-						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 							className: "mt-3 text-sm text-muted",
-							children: [
-								"This website sends the enquiry as an email to ",
-								company.email,
-								". It is not saved as an account. To ask about a message you already sent, email that address."
-							]
+							children: "This website sends the enquiry as an email. It is not saved as an account. To ask about a message you already sent, use the contact form."
 						})
 					] }),
 					formError ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {

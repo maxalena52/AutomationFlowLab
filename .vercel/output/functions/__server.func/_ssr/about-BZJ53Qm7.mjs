@@ -1,6 +1,6 @@
 import { d as serviceGroups, i as company, u as process } from "./site-BaGvWwC4.mjs";
 import { x as require_jsx_runtime, y as Link } from "../_libs/@tanstack/react-router+[...].mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/about-C7woWPDu.js
+//#region node_modules/.nitro/vite/services/ssr/assets/about-BZJ53Qm7.js
 var import_jsx_runtime = require_jsx_runtime();
 function AboutPage() {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
@@ -94,15 +94,15 @@ function AboutPage() {
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
 						className: "mt-3 text-muted",
 						children: [
-							"Email",
+							"Use the",
 							" ",
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
+								to: "/contact",
+								search: { topic: "" },
 								className: "font-semibold text-ink underline decoration-line underline-offset-4",
-								href: `mailto:${company.email}`,
-								children: company.email
+								children: "contact form"
 							}),
-							" ",
-							"or use the contact form."
+							"."
 						]
 					})]
 				})

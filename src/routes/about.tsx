@@ -53,11 +53,11 @@ function AboutPage() {
         <section className="max-w-3xl">
           <h2 className="font-display text-2xl">Contact</h2>
           <p className="mt-3 text-muted">
-            Email{" "}
-            <a className="font-semibold text-ink underline decoration-line underline-offset-4" href={`mailto:${company.email}`}>
-              {company.email}
-            </a>{" "}
-            or use the contact form.
+            Use the{" "}
+            <Link to="/contact" search={{ topic: "" }} className="font-semibold text-ink underline decoration-line underline-offset-4">
+              contact form
+            </Link>
+            .
           </p>
         </section>
       </div>

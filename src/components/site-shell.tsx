@@ -99,9 +99,9 @@ export function SiteShell({ children }: { children: ReactNode }) {
             <p className="mt-2 max-w-sm text-sm text-muted">{company.supporting}</p>
             <p className="mt-2 max-w-sm text-sm text-muted">{company.positioning}</p>
             <p className="mt-4 text-sm">
-              <a className="font-semibold underline decoration-line underline-offset-4" href={`mailto:${company.email}`}>
-                {company.email}
-              </a>
+              <Link to="/contact" search={{ topic: "" }} className="font-semibold underline decoration-line underline-offset-4">
+                Contact form
+              </Link>
             </p>
           </div>
           <div>
