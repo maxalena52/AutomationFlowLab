@@ -1,0 +1,38 @@
+{
+  "url": "http://127.0.0.1:8081/",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "Website Growth Check and Business Systems — Automation Flow Lab",
+      "hasCanvas": false,
+      "bodyTextLen": 5380,
+      "bodyTextHash": "b068ebcd29a8af3af899b851ab23d1d50f931c3fbd90709bd83495e5b8ed4ec8",
+      "bodyTextPrefix": "Skip to content Website Growth Check Full Audit Services About C",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-built.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "Website Growth Check and Business Systems — Automation Flow Lab",
+      "hasCanvas": false,
+      "bodyTextLen": 5318,
+      "bodyTextHash": "18f3f710610d37be81fb89d2be020ab64a9a204a1dd3aa7c8c1003161a397273",
+      "bodyTextPrefix": "Skip to content Open menu Website Growth Check Is your website a",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-built-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/app-builder-built.json",
+  "divergesFromBaseline": false,
+  "baselineReasons": []
+}
