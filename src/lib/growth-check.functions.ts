@@ -1,3 +1,4 @@
+import { lookup } from "node:dns/promises";
 import { createServerFn } from "@tanstack/react-start";
 
 export type FindingStatus = "CRITICAL" | "NEEDS WORK" | "WORKING";
@@ -28,27 +29,105 @@ export function overallCopy(status: FindingStatus) {
   return OVERALL[status];
 }
 
-function blockedHost(hostname: string) {
+function privateIPv4(a: number, b: number, c: number, d: number) {
+  if ([a, b, c, d].some((n) => !Number.isInteger(n) || n < 0 || n > 255)) return true;
+  if (a === 0 || a === 10 || a === 127) return true;
+  if (a === 100 && b >= 64 && b <= 127) return true;
+  if (a === 169 && b === 254) return true;
+  if (a === 172 && b >= 16 && b <= 31) return true;
+  if (a === 192 && b === 168) return true;
+  if (a === 192 && b === 0 && (c === 0 || c === 2)) return true;
+  if (a === 198 && (b === 18 || b === 19)) return true;
+  if (a === 198 && b === 51 && c === 100) return true;
+  if (a === 203 && b === 0 && c === 113) return true;
+  if (a >= 224) return true;
+  return false;
+}
+
+function expandIPv6(address: string) {
+  const input = address.toLowerCase().split("%")[0] ?? "";
+  const halves = input.split("::");
+  if (halves.length > 2) return null;
+  const part = (value: string) =>
+    value
+      ? value.split(":").map((piece) => (/^[0-9a-f]{1,4}$/.test(piece) ? Number.parseInt(piece, 16) : Number.NaN))
+      : [];
+  const left = part(halves[0] ?? "");
+  const right = halves.length === 2 ? part(halves[1] ?? "") : [];
+  if ([...left, ...right].some((n) => Number.isNaN(n))) return null;
+  if (halves.length === 1) return left.length === 8 ? left : null;
+  const missing = 8 - left.length - right.length;
+  if (missing < 0) return null;
+  return [...left, ...Array(missing).fill(0), ...right];
+}
+
+function privateIp(address: string): boolean {
+  const value = address.toLowerCase().split("%")[0] ?? "";
+  if (value.startsWith("::ffff:") && value.includes(".")) return privateIp(value.slice(7));
+  if (value.includes(".")) {
+    const parts = value.split(".").map((part) => Number(part));
+    if (parts.length !== 4) return true;
+    return privateIPv4(parts[0] ?? -1, parts[1] ?? -1, parts[2] ?? -1, parts[3] ?? -1);
+  }
+  const v6 = expandIPv6(value);
+  if (!v6) return true;
+  if (v6.every((n) => n === 0)) return true;
+  if (v6.slice(0, 7).every((n) => n === 0) && v6[7] === 1) return true;
+  if ((v6[0]! & 0xfe00) === 0xfc00) return true;
+  if ((v6[0]! & 0xffc0) === 0xfe80 || (v6[0]! & 0xffc0) === 0xfec0) return true;
+  if ((v6[0]! & 0xff00) === 0xff00) return true;
+  if (v6[0] === 0x100 && v6.slice(1, 4).every((n) => n === 0)) return true;
+  const mapped = v6.slice(0, 5).every((n) => n === 0) && v6[5] === 0xffff;
+  const nat64 = v6[0] === 0x64 && v6[1] === 0xff9b && v6.slice(2, 6).every((n) => n === 0);
+  if (mapped || nat64) {
+    return privateIPv4(v6[6]! >> 8, v6[6]! & 0xff, v6[7]! >> 8, v6[7]! & 0xff);
+  }
+  return false;
+}
+
+function blockedName(hostname: string) {
   const host = hostname.toLowerCase().replace(/\.$/, "");
+  if (!host || host.includes("%")) return true;
   if (
     host === "localhost" ||
     host.endsWith(".localhost") ||
     host.endsWith(".local") ||
     host.endsWith(".internal") ||
-    host === "0.0.0.0" ||
-    host === "metadata.google.internal"
+    host.endsWith(".localdomain") ||
+    host.endsWith(".home") ||
+    host.endsWith(".lan") ||
+    host === "metadata.google.internal" ||
+    host.endsWith(".metadata.google.internal")
   ) {
     return true;
   }
-  const ip = /^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/.exec(host);
-  if (!ip) return false;
-  const a = Number(ip[1]);
-  const b = Number(ip[2]);
-  if (a === 10 || a === 127 || a === 0) return true;
-  if (a === 169 && b === 254) return true;
-  if (a === 172 && b >= 16 && b <= 31) return true;
-  if (a === 192 && b === 168) return true;
+  if (/^\d+(\.\d+){0,3}$/.test(host)) return host.split(".").length !== 4 || privateIp(host);
+  if (host.includes(":")) return privateIp(host);
   return false;
+}
+
+async function resolvesPrivate(hostname: string) {
+  if (blockedName(hostname)) return "private" as const;
+  try {
+    const records = await Promise.race([
+      lookup(hostname, { all: true, verbatim: true }),
+      new Promise<never>((_, reject) => setTimeout(() => reject(new Error("timeout")), 4000)),
+    ]);
+    if (!records.length || records.some((record) => privateIp(record.address))) return "private" as const;
+    return "public" as const;
+  } catch {
+    return "failed" as const;
+  }
+}
+
+async function publicWebUrl(url: URL) {
+  if (url.protocol !== "http:" && url.protocol !== "https:") return "Enter a public website address.";
+  if (url.username || url.password) return "Enter a public website address.";
+  if (url.port && url.port !== "80" && url.port !== "443") return "Enter a public website address.";
+  const resolved = await resolvesPrivate(url.hostname);
+  if (resolved === "private") return "Enter a public website address.";
+  if (resolved === "failed") return "The check could not be completed.";
+  return "";
 }
 
 function isChallenge(status: number, headers: Headers, html: string) {
@@ -86,10 +165,11 @@ async function readPublicPage(raw: string) {
     return { error: "Enter a website address, such as yourbusiness.com." };
   }
   if (current.protocol !== "http:" && current.protocol !== "https:") {
-    return { error: "Enter a public website address." };
+    return { error: "Enter a public website address.", blocked: true };
   }
   for (let hop = 0; hop < 4; hop += 1) {
-    if (blockedHost(current.hostname)) return { error: "Enter a public website address." };
+    const refused = await publicWebUrl(current);
+    if (refused) return { error: refused, blocked: refused === "Enter a public website address." };
     let response: Response;
     try {
       response = await fetch(current, {
@@ -106,7 +186,11 @@ async function readPublicPage(raw: string) {
     if (response.status >= 300 && response.status < 400) {
       const next = response.headers.get("location");
       if (!next) return { error: "The check could not be completed." };
-      current = new URL(next, current);
+      try {
+        current = new URL(next, current);
+      } catch {
+        return { error: "The check could not be completed." };
+      }
       continue;
     }
     if (!response.ok) {
@@ -293,6 +377,8 @@ function analyse(html: string, finalUrl: URL): CheckResult {
   return { overall, findings };
 }
 
+const checkGate = globalThis as typeof globalThis & { __growthCheckRunning?: boolean };
+
 export const runGrowthCheck = createServerFn({ method: "POST" })
   .validator((input: unknown) => {
     const obj = typeof input === "object" && input ? (input as Record<string, unknown>) : {};
@@ -301,21 +387,35 @@ export const runGrowthCheck = createServerFn({ method: "POST" })
     return { url, html };
   })
   .handler(async ({ data }): Promise<CheckResult & { error?: string }> => {
-    let pageUrl: URL;
+    if (checkGate.__growthCheckRunning) {
+      return {
+        overall: "NEEDS WORK",
+        findings: [],
+        error: "A check is already running. Wait until it finishes, then try again.",
+      };
+    }
+    checkGate.__growthCheckRunning = true;
     try {
-      pageUrl = new URL(data.url);
-    } catch {
-      return { overall: "NEEDS WORK", findings: [], error: "Enter a website address, such as yourbusiness.com." };
+      let pageUrl: URL;
+      try {
+        pageUrl = new URL(data.url);
+      } catch {
+        return { overall: "NEEDS WORK", findings: [], error: "Enter a website address, such as yourbusiness.com." };
+      }
+      const refused = await publicWebUrl(pageUrl);
+      if (refused) return { overall: "NEEDS WORK", findings: [], error: refused };
+      if (data.html && /<(html|head|body|title)\b/i.test(data.html)) {
+        return { ...analyse(data.html, pageUrl), source: "pasted" };
+      }
+      const read = await readPublicPage(data.url);
+      if ("html" in read && read.html) return { ...analyse(read.html, read.finalUrl), source: "live" };
+      if ("blocked" in read && read.blocked) {
+        return { overall: "NEEDS WORK", findings: [], error: read.error };
+      }
+      const archived = await readArchive(data.url);
+      if (archived) return { ...analyse(archived.html, archived.finalUrl), source: "archive" };
+      return { overall: "NEEDS WORK", findings: [], error: ("error" in read && read.error) || "The check could not be completed." };
+    } finally {
+      checkGate.__growthCheckRunning = false;
     }
-    if (pageUrl.protocol !== "http:" && pageUrl.protocol !== "https:") {
-      return { overall: "NEEDS WORK", findings: [], error: "Enter a public website address." };
-    }
-    if (data.html && /<(html|head|body|title)\b/i.test(data.html)) {
-      return { ...analyse(data.html, pageUrl), source: "pasted" };
-    }
-    const read = await readPublicPage(data.url);
-    if ("html" in read && read.html) return { ...analyse(read.html, read.finalUrl), source: "live" };
-    const archived = await readArchive(data.url);
-    if (archived) return { ...analyse(archived.html, archived.finalUrl), source: "archive" };
-    return { overall: "NEEDS WORK", findings: [], error: ("error" in read && read.error) || "The check could not be completed." };
   });

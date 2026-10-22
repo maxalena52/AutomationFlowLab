@@ -124,7 +124,7 @@ async function getStartManifest(matchedRoutes) {
 }
 var manifest = { "3c9657c46f54c4c6ae85dda6ef44849eec7eb95f2798badbb1362ba09aed3f9b": {
 	functionName: "runGrowthCheck_createServerFn_handler",
-	importer: () => import("./growth-check.functions-D8e-C5ZE.mjs")
+	importer: () => import("./growth-check.functions-yaXQzUbw.mjs")
 } };
 async function getServerFnById(id, access) {
 	const serverFnInfo = manifest[id];
