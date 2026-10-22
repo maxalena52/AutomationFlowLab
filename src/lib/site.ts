@@ -402,13 +402,14 @@ export const tools = [
 ];
 
 export const oneOffPrices: [string, string][] = [
-  ["Excel problem diagnosis", "From R2,000"],
-  ["Excel workbook or reporting repair", "From R3,000"],
-  ["Website analytics setup or repair", "From R5,000"],
-  ["Workflow automation assessment", "From R4,000"],
+  ["Excel problem diagnosis", "From R950"],
+  ["Excel workbook or reporting repair", "From R950"],
+  ["Zoho configuration and integrations", "From R2,500"],
+  ["Website analytics setup or repair", "From R2,500"],
+  ["Workflow automation assessment", "From R1,500 – R3,500"],
   ["Workflow automation build", "From R12,500"],
-  ["Zoho configuration and integrations", "From R15,000"],
-  ["SharePoint workspace and library design", "From R15,000"],
+  ["SharePoint workspace and library design", "From R10,000"],
+  ["SharePoint config and build", "From R15,000"],
   ["Custom webapp scoping", "From R7,500"],
   ["Custom webapp design and build", "From R25,000"],
 ];

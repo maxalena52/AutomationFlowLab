@@ -1,9 +1,9 @@
 import { i as __toESM } from "../_runtime.mjs";
-import { i as company } from "./site-BaGvWwC4.mjs";
+import { i as company } from "./site-As1DZcAK.mjs";
 import { J as require_react, _ as createFileRoute, b as useRouter, d as Scripts, f as HeadContent, g as lazyRouteComponent, h as Outlet, m as createRouter, v as createRootRoute, x as require_jsx_runtime, y as Link } from "../_libs/@tanstack/react-router+[...].mjs";
 import { n as ArrowLeft, t as TriangleAlert } from "../_libs/lucide-react.mjs";
 import { a as union, i as string, n as number, r as object, t as literal } from "../_libs/zod.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/router-DHNGeeho.js
+//#region node_modules/.nitro/vite/services/ssr/assets/router-D7jmreRG.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var __defProp = Object.defineProperty;
@@ -671,7 +671,7 @@ var Route$20 = createRootRoute({
 		] })]
 	})
 });
-var $$splitComponentImporter$19 = () => import("./routes-BpwlGKdE.mjs");
+var $$splitComponentImporter$19 = () => import("./routes-Domhnjj9.mjs");
 var Route$19 = createFileRoute("/")({
 	head: () => ({ meta: [{ title: "Website Growth Check and Business Systems — Automation Flow Lab" }, {
 		name: "description",
@@ -679,12 +679,12 @@ var Route$19 = createFileRoute("/")({
 	}] }),
 	component: lazyRouteComponent($$splitComponentImporter$19, "component")
 });
-var $$splitComponentImporter$18 = () => import("./about-BZJ53Qm7.mjs");
+var $$splitComponentImporter$18 = () => import("./about-BaAHJBKP.mjs");
 var Route$18 = createFileRoute("/about")({
 	head: () => ({ meta: [{ title: "About — Automation Flow Lab" }] }),
 	component: lazyRouteComponent($$splitComponentImporter$18, "component")
 });
-var $$splitComponentImporter$17 = () => import("./audit-CHsiDfSR.mjs");
+var $$splitComponentImporter$17 = () => import("./audit-nvJpX5v7.mjs");
 var Route$17 = createFileRoute("/audit")({
 	head: () => ({ meta: [{ title: "Website Revenue & Growth Audit — Automation Flow Lab" }] }),
 	component: lazyRouteComponent($$splitComponentImporter$17, "component")
@@ -694,7 +694,7 @@ var Route$16 = createFileRoute("/community-standards")({
 	head: () => ({ meta: [{ title: "Community Standards — Automation Flow Lab" }] }),
 	component: lazyRouteComponent($$splitComponentImporter$16, "component")
 });
-var $$splitComponentImporter$15 = () => import("./contact-w-zEoUNo.mjs");
+var $$splitComponentImporter$15 = () => import("./contact-DJ2SMxaU.mjs");
 var Route$15 = createFileRoute("/contact")({
 	validateSearch: (search) => ({ topic: typeof search.topic === "string" ? search.topic : "" }),
 	head: () => ({ meta: [{ title: "Contact — Automation Flow Lab" }] }),
@@ -710,7 +710,7 @@ var Route$13 = createFileRoute("/copyright")({
 	head: () => ({ meta: [{ title: "Copyright Policy — Automation Flow Lab" }] }),
 	component: lazyRouteComponent($$splitComponentImporter$13, "component")
 });
-var $$splitComponentImporter$12 = () => import("./custom-builds-Dy1klTqM.mjs");
+var $$splitComponentImporter$12 = () => import("./custom-builds-C1KDJ-c-.mjs");
 var Route$12 = createFileRoute("/custom-builds")({
 	head: () => ({ meta: [{ title: "Custom Builds — Automation Flow Lab" }] }),
 	component: lazyRouteComponent($$splitComponentImporter$12, "component")
@@ -725,7 +725,7 @@ var Route$10 = createFileRoute("/legal-safety")({
 	head: () => ({ meta: [{ title: "Legal and Safety — Automation Flow Lab" }] }),
 	component: lazyRouteComponent($$splitComponentImporter$10, "component")
 });
-var $$splitComponentImporter$9 = () => import("./pricing-CqKzEWYi.mjs");
+var $$splitComponentImporter$9 = () => import("./pricing-B4F4v_dh.mjs");
 var Route$9 = createFileRoute("/pricing")({
 	head: () => ({ meta: [{ title: "Pricing — Automation Flow Lab" }] }),
 	component: lazyRouteComponent($$splitComponentImporter$9, "component")
@@ -735,12 +735,12 @@ var Route$8 = createFileRoute("/privacy")({
 	head: () => ({ meta: [{ title: "Privacy Policy — Automation Flow Lab" }] }),
 	component: lazyRouteComponent($$splitComponentImporter$8, "component")
 });
-var $$splitComponentImporter$7 = () => import("./services-BDjLs7BV.mjs");
+var $$splitComponentImporter$7 = () => import("./services-BCkV7zjJ.mjs");
 var Route$7 = createFileRoute("/services")({
 	head: () => ({ meta: [{ title: "Services — Automation Flow Lab" }] }),
 	component: lazyRouteComponent($$splitComponentImporter$7, "component")
 });
-var $$splitComponentImporter$6 = () => import("./support-plans-CuYdppxF.mjs");
+var $$splitComponentImporter$6 = () => import("./support-plans-DT2MF0r2.mjs");
 var Route$6 = createFileRoute("/support-plans")({
 	validateSearch: (search) => ({ plan: typeof search.plan === "string" ? search.plan : "" }),
 	head: () => ({ meta: [{ title: "Support Plans — Automation Flow Lab" }] }),
@@ -751,12 +751,12 @@ var Route$5 = createFileRoute("/terms")({
 	head: () => ({ meta: [{ title: "Terms of Service — Automation Flow Lab" }] }),
 	component: lazyRouteComponent($$splitComponentImporter$5, "component")
 });
-var $$splitComponentImporter$4 = () => import("./tools-DnuihGjR.mjs");
+var $$splitComponentImporter$4 = () => import("./tools-BiyR5zMN.mjs");
 var Route$4 = createFileRoute("/tools/")({
 	head: () => ({ meta: [{ title: "Tools — Automation Flow Lab" }] }),
 	component: lazyRouteComponent($$splitComponentImporter$4, "component")
 });
-var $$splitComponentImporter$3 = () => import("./certflow-BDTIfdPz.mjs");
+var $$splitComponentImporter$3 = () => import("./certflow-CSq_371x.mjs");
 var Route$3 = createFileRoute("/tools/certflow")({
 	head: () => ({ meta: [{ title: "Certflow — Automation Flow Lab" }] }),
 	component: lazyRouteComponent($$splitComponentImporter$3, "component")
